@@ -1,7 +1,5 @@
 # NodeJS Pro
 
----
-
 ### Clase 01
 
 - Descripción del proyecto
