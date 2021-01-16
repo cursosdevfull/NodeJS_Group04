@@ -1,0 +1,18 @@
+[
+	{
+		"idMedico": 1,
+		"name": "Pedro",
+		"lastname": "Balleto",
+		"dni": "45776745",
+		"cmp": "3456",
+		"isActive": true
+	},
+	{
+		"idMedico": 1,
+		"name": "Alicia",
+		"lastname": "Cáceres",
+		"dni": "45776745",
+		"cmp": "3456",
+		"isActive": true
+	}
+]
