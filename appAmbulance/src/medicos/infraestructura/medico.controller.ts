@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-import { resourceLimits } from 'worker_threads';
 import { MedicoUseCase } from '../aplicacion/medico.usecase';
 import { MedicoEntity } from '../dominio/medico.entity';
 
@@ -31,7 +30,7 @@ export class MedicoController {
 
 	getByPage(req: Request, res: Response) {
 		const results = this.usecase.getByPage(+req.params.page);
-		res.json(resourceLimits);
+		res.json(results);
 	}
 
 	update(req: Request, res: Response) {

@@ -1,4 +1,14 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  JoinTable,
+  ManyToMany,
+  ManyToOne,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from "typeorm";
+import { User } from "./User";
 
 @Entity()
 export class Car {
@@ -19,4 +29,15 @@ export class Car {
 
   @Column()
   isSold: boolean;
+
+  /*   @OneToOne((type) => User, { cascade: true })
+  @JoinColumn()
+  user: User; */
+
+  /*   @ManyToOne((type) => User, (user) => user.cars)
+  user: User; */
+
+  @ManyToMany((type) => User, (user) => user.cars)
+  @JoinTable()
+  users: User[];
 }

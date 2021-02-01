@@ -1,5 +1,3 @@
-import { MedicoEntity } from '../../medicos/dominio/medico.entity';
-
 export abstract class GenericoRepository<T> {
 	abstract getAll(): T[];
 	abstract getOne(id: number): T;

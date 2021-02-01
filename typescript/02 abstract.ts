@@ -2,7 +2,7 @@ interface IPersona {
   id: number;
   nombre: string;
   edad: number;
-  pasatiempos: string;
+  pasatiempos: string[];
 }
 
 abstract class IBDAcciones {

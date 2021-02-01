@@ -3,7 +3,7 @@
   "host": "localhost",
   "port": 3306,
   "username": "root",
-  "password": "todoVAl3",
+  "password": "3LQuijote",
   "database": "dbPractica",
   "synchronize": true,
   "logging": false,

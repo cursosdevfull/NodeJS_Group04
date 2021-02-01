@@ -15,7 +15,7 @@ docker volume create mysql-data
 3. Crear el contenedor
 
 ```
-docker run -d --name=mysql-server -p 3306:3306 -e MYSQL_ROOT_PASSWORD=3LQuijote -v  mysql-data:/var/lib/mysql mysql
+docker run -d --name=mysql-server-node04 -p 3306:3306 -e MYSQL_ROOT_PASSWORD=3LQuijote -v  mysql-node04:/var/lib/mysql mysql
 ```
 
 4. Revisar si funciona el contenedor
