@@ -12,7 +12,7 @@ export class MedicoController {
 		this.delete = this.delete.bind(this); */
 	}
 
-	getAll() {
+	/* getAll() {
 		const results = this.usecase.getAll();
 		return results;
 	}
@@ -42,5 +42,5 @@ export class MedicoController {
 	delete(req: Request, res: Response) {
 		const result = this.usecase.delete(+req.params.id);
 		res.json(result);
-	}
+	} */
 }

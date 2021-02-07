@@ -2,8 +2,8 @@ import { GenericoRepository } from '../../compartido/dominio/generico.repository
 import { MedicoEntity } from '../dominio/medico.entity';
 import mockMedicos from '../mocks/medics.json';
 
-export class MedicoOperation extends GenericoRepository<MedicoEntity> {
-	getAll(): MedicoEntity[] {
+export class MedicoOperation {
+	/* getAll(): MedicoEntity[] {
 		const list: MedicoEntity[] = mockMedicos;
 		return list;
 	}
@@ -23,5 +23,5 @@ export class MedicoOperation extends GenericoRepository<MedicoEntity> {
 	}
 	delete(id: number): MedicoEntity {
 		return mockMedicos[0];
-	}
+	} */
 }

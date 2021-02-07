@@ -1,10 +1,9 @@
 import { GenericoRepository } from '../../compartido/dominio/generico.repository';
 import { MedicoEntity } from '../dominio/medico.entity';
-
 export class MedicoUseCase {
 	constructor(private operacion: GenericoRepository<MedicoEntity>) {}
 
-	getAll(): MedicoEntity[] {
+	/* getAll(): MedicoEntity[] {
 		return this.operacion.getAll();
 	}
 
@@ -26,5 +25,5 @@ export class MedicoUseCase {
 
 	delete(id: number): MedicoEntity {
 		return this.operacion.delete(id);
-	}
+	} */
 }

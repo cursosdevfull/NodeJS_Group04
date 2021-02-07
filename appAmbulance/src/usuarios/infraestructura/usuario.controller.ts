@@ -1,0 +1,89 @@
+import { UsuarioUseCase } from '../aplicacion/usuario.usecase';
+import { Request, Response } from 'express';
+import { UsuarioModel } from '../dominio/usuario.model';
+
+export class UsuarioController {
+	constructor(private readonly usecase: UsuarioUseCase) {
+		this.getAll = this.getAll.bind(this);
+		this.getById = this.getById.bind(this);
+		this.getByPage = this.getByPage.bind(this);
+		this.insert = this.insert.bind(this);
+		this.update = this.update.bind(this);
+		this.delete = this.delete.bind(this);
+		this.getSearch = this.getSearch.bind(this);
+	}
+
+	async getAll(req: Request, res: Response) {
+		const where: object = {};
+		const relations: string[] = ['roles'];
+		const order: object = {};
+
+		const resultados = await this.usecase.getAll(where, relations, order);
+		res.json(resultados);
+	}
+
+	async getSearch(req: Request, res: Response) {
+		const resultados = await this.usecase.getSearch();
+		res.json(resultados);
+	}
+
+	async getById(req: Request, res: Response) {
+		const id = +req.params.id;
+
+		const resultado = await this.usecase.getById(id);
+		res.json(resultado);
+	}
+
+	async getByPage(req: Request, res: Response) {
+		const page = +req.params.page;
+		const pageSize = +req.params.pageSize;
+		const where: object = {};
+		const relations: string[] = [];
+		const order: object = {};
+
+		const [records, totalRecords] = await this.usecase.getByPage(
+			page,
+			pageSize,
+			where,
+			relations,
+			order
+		);
+
+		res.json({ records, totalRecords });
+	}
+
+	async insert(req: Request, res: Response) {
+		const usuario: Partial<UsuarioModel> = {
+			nombre: req.body.nombre,
+			correo: req.body.correo,
+			password: req.body.password,
+			refreshToken: 'abc',
+		};
+
+		const roles: any[] = req.body.roles;
+		// roles = [1, 2]
+		// roles = [{id: 1}, {id: 2}]
+		const rolesUpdate = roles.map(rolId => ({ id: rolId }));
+		usuario.roles = rolesUpdate;
+
+		const resultado = await this.usecase.insert(usuario);
+		res.json(resultado);
+	}
+
+	async update(req: Request, res: Response) {
+		const usuario: Partial<UsuarioModel> = req.body;
+		const where: object = {};
+		const relations: string[] = [];
+
+		const resultado = await this.usecase.update(usuario, where, relations);
+		res.json(resultado);
+	}
+
+	async delete(req: Request, res: Response) {
+		const id = +req.params.id;
+
+		const resultado = await this.usecase.delete(id);
+
+		res.json(resultado);
+	}
+}

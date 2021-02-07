@@ -1,18 +1,43 @@
+import { createConnection } from 'typeorm';
+import yenv from 'yenv';
 export interface IDatabaseBootstrap {
-  initialize(): Promise<any>;
-  getConnection(): any;
+	initialize(): Promise<any>;
+	getConnection(): any;
 }
+const env = yenv();
+
+let client: any;
 
 export class DatabaseBootstrap implements IDatabaseBootstrap {
-  async initialize() {
-    const promise = new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(true);
-      }, 500);
-    });
+	async initialize() {
+		const promise = new Promise((resolve, reject) => {
+			const parametersConnection = {
+				host: env.DATABASE.MYSQL.HOST,
+				type: env.DATABASE.MYSQL.TYPE,
+				username: env.DATABASE.MYSQL.USERNAME,
+				password: env.DATABASE.MYSQL.PASSWORD,
+				database: env.DATABASE.MYSQL.DATABASE,
+				port: env.DATABASE.MYSQL.PORT,
+				entities: [env.DATABASE.MYSQL.ENTITIES],
+				synchronize: env.DATABASE.MYSQL.SYNCHRONIZE,
+			};
 
-    await promise;
-  }
+			createConnection(parametersConnection).then(
+				connection => {
+					console.log('Connected to database');
+					client = connection;
+					resolve(true);
+				},
+				error => {
+					reject(error);
+				}
+			);
+		});
 
-  getConnection(): any {}
+		await promise;
+	}
+
+	getConnection(): any {
+		return client;
+	}
 }
