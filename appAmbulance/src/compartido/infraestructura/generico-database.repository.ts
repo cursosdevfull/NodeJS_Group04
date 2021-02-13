@@ -23,6 +23,16 @@ export default class GenericoDatabaseRepository<T> {
 		return records;
 	}
 
+	async getOne(where: object = {}, relations: string[] = []): Promise<T> {
+		const repository: Repository<T> = getRepository<T>(this.entity);
+		const record: T = await repository.findOne({
+			where,
+			relations,
+		});
+
+		return record;
+	}
+
 	async getById(id: number, relations: string[] = []): Promise<T> {
 		const repository: Repository<T> = getRepository<T>(this.entity);
 		const record: T = await repository.findOne(id, { relations });

@@ -1,6 +1,7 @@
 import { UsuarioUseCase } from '../aplicacion/usuario.usecase';
 import { Request, Response } from 'express';
 import { UsuarioModel } from '../dominio/usuario.model';
+import { Tokens } from '../../compartido/infraestructura/token';
 
 export class UsuarioController {
 	constructor(private readonly usecase: UsuarioUseCase) {
@@ -54,15 +55,13 @@ export class UsuarioController {
 
 	async insert(req: Request, res: Response) {
 		const usuario: Partial<UsuarioModel> = {
-			nombre: req.body.nombre,
-			correo: req.body.correo,
+			nombre: req.body.name,
+			correo: req.body.email,
 			password: req.body.password,
-			refreshToken: 'abc',
+			refreshToken: Tokens.generateRefreshToken(),
 		};
 
 		const roles: any[] = req.body.roles;
-		// roles = [1, 2]
-		// roles = [{id: 1}, {id: 2}]
 		const rolesUpdate = roles.map(rolId => ({ id: rolId }));
 		usuario.roles = rolesUpdate;
 

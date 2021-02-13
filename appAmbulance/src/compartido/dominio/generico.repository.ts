@@ -1,5 +1,6 @@
 export interface GenericoRepository<T> {
 	getAll(where: object, relations: string[], order: object): Promise<T[]>;
+	getOne(where: object, relations: string[]): Promise<T>;
 	getById(id: number, relations: string[]): Promise<T>;
 	getByPage(
 		page: number,
