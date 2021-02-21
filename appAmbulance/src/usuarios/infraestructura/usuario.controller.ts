@@ -2,6 +2,7 @@ import { UsuarioUseCase } from '../aplicacion/usuario.usecase';
 import { Request, Response } from 'express';
 import { UsuarioModel } from '../dominio/usuario.model';
 import { Tokens } from '../../compartido/infraestructura/token';
+import { userInfo } from 'os';
 
 export class UsuarioController {
 	constructor(private readonly usecase: UsuarioUseCase) {
@@ -15,7 +16,7 @@ export class UsuarioController {
 	}
 
 	async getAll(req: Request, res: Response) {
-		const where: object = {};
+		const where: object = { last: '20' };
 		const relations: string[] = ['roles'];
 		const order: object = {};
 
@@ -70,8 +71,21 @@ export class UsuarioController {
 	}
 
 	async update(req: Request, res: Response) {
-		const usuario: Partial<UsuarioModel> = req.body;
-		const where: object = {};
+		const usuario: Partial<UsuarioModel> = {};
+		if (req.body.name) {
+			usuario.nombre = req.body.name;
+		}
+		if (req.body.email) {
+			usuario.correo = req.body.email;
+		}
+		if (req.body.roles) {
+			usuario.roles = req.body.roles;
+		}
+		if (req.body.password) {
+			usuario.password = req.body.password;
+		}
+
+		const where: object = { id: +req.params.id };
 		const relations: string[] = [];
 
 		const resultado = await this.usecase.update(usuario, where, relations);

@@ -4,7 +4,9 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"serve": "cross-env NODE_ENV=production node ./server.js",
+		"clean": "rimraf cache dist reports coverage",
+		"build": "tsc && gulp minify",
+		"serve": "cross-env NODE_ENV=production node dist/server.js",
 		"develop": "nodemon src/server.ts"
 	},
 	"keywords": [],

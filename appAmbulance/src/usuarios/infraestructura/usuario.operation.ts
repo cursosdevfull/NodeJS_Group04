@@ -10,6 +10,21 @@ export class UsuarioOperation
 		super(Usuario);
 	}
 
+	async getAll(
+		where: object = {},
+		relations: string[] = [],
+		order: object = {}
+	): Promise<Usuario[]> {
+		const repository = getRepository<Usuario>(Usuario);
+		const records: Usuario[] = await repository.find({
+			where,
+			relations,
+			order,
+		});
+
+		return records;
+	}
+
 	async getSearch(): Promise<Usuario[]> {
 		const repository = getRepository<Usuario>(Usuario);
 		const resultados = await repository.find();
