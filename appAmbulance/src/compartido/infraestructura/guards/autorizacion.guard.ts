@@ -1,4 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
+import { MessagesError } from '../errors';
+import { Responses } from '../responses';
 
 export class AutorizacionGuard {
 	static canActivate(...rolesAllowed: string[]) {
@@ -16,7 +18,7 @@ export class AutorizacionGuard {
 			}
 
 			if (!roleMatched) {
-				res.status(409).send('User not authorized');
+				Responses.sentUserForbidden(res, MessagesError.USER_FORBIDDEN);
 			}
 		};
 	}

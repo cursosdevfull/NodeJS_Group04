@@ -1,6 +1,7 @@
 import { PilotoUseCase } from '../aplicacion/piloto.usecase';
 import { Request, Response } from 'express';
 import { PilotoModel } from '../dominio/piloto.model';
+import { Responses } from '../../compartido/infraestructura/responses';
 
 export class PilotoController {
 	constructor(private readonly usecase: PilotoUseCase) {
@@ -19,19 +20,19 @@ export class PilotoController {
 		const order: object = {};
 
 		const resultados = await this.usecase.getAll(where, relations, order);
-		res.json(resultados);
+		Responses.sentOk(res, resultados);
 	}
 
 	async getSearch(req: Request, res: Response) {
 		const resultados = await this.usecase.getSearch();
-		res.json(resultados);
+		Responses.sentOk(res, resultados);
 	}
 
 	async getById(req: Request, res: Response) {
 		const id = +req.params.id;
 
 		const resultado = await this.usecase.getById(id);
-		res.json(resultado);
+		Responses.sentOk(res, resultado);
 	}
 
 	async getByPage(req: Request, res: Response) {
@@ -49,7 +50,7 @@ export class PilotoController {
 			order
 		);
 
-		res.json({ records, totalRecords });
+		Responses.sentOk(res, { records, totalRecords });
 	}
 
 	async insert(req: Request, res: Response) {
@@ -58,7 +59,7 @@ export class PilotoController {
 		};
 
 		const resultado = await this.usecase.insert(Piloto);
-		res.json(resultado);
+		Responses.sentOk(res, resultado, 201);
 	}
 
 	async update(req: Request, res: Response) {
@@ -67,7 +68,7 @@ export class PilotoController {
 		const relations: string[] = [];
 
 		const resultado = await this.usecase.update(Piloto, where, relations);
-		res.json(resultado);
+		Responses.sentOk(res, resultado);
 	}
 
 	async delete(req: Request, res: Response) {
@@ -75,6 +76,6 @@ export class PilotoController {
 
 		const resultado = await this.usecase.delete(id);
 
-		res.json(resultado);
+		Responses.sentOk(res, resultado);
 	}
 }

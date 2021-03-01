@@ -30,4 +30,21 @@ export class AuthUseCase {
 			return null;
 		}
 	}
+
+	async getNewAccessToken(user: Partial<UsuarioModel>): Promise<IToken> {
+		const existsUser = await this.operacion.getOne(
+			{ refreshToken: user.refreshToken },
+			['roles']
+		);
+		if (existsUser) {
+			const tokens: IToken = {
+				accessToken: Tokens.generateAccessToken(existsUser),
+				refreshToken: existsUser.refreshToken,
+			};
+
+			return tokens;
+		} else {
+			return null;
+		}
+	}
 }

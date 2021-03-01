@@ -6,10 +6,22 @@ import { router as RouterAuth } from './auth/infraestructura/auth.route';
 import { AutenticacionGuard } from './compartido/infraestructura/guards/autenticacion.guard';
 import { Errors } from './compartido/infraestructura/errors';
 
+import swaggerUI from 'swagger-ui-express';
+import swaggerJsdoc = require('swagger-jsdoc');
+import swaggerConfig from './common/config/swagger.config.json';
+
+const swaggerDocs = swaggerJsdoc(swaggerConfig);
+
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use(
+	'/docs',
+	swaggerUI.serve,
+	swaggerUI.setup(swaggerDocs, { explorer: true })
+);
 
 app.use('/medics', RouterMedic);
 app.use('/users', RouterUser);

@@ -3,6 +3,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { UsuarioModel } from '../../usuarios/dominio/usuario.model';
 import yenv from 'yenv';
 import moment from 'moment';
+import { MessagesError } from './errors';
+import { MessagesApp } from './constants';
 
 const env = yenv();
 
@@ -34,15 +36,15 @@ export class Tokens {
 				);
 				resolve(payload);
 			} catch (error) {
-				if (error.message.toLowerCase() === 'token expired') {
+				if (error.message.toLowerCase() === MessagesApp.TOKEN_EXPIRED) {
 					reject({
 						status: 409,
-						message: 'Token expired',
+						message: MessagesError.TOKEN_EXPIRED,
 					});
 				} else {
 					reject({
 						status: 401,
-						message: 'Token invalid',
+						message: MessagesError.TOKEN_INVALID,
 					});
 				}
 			}

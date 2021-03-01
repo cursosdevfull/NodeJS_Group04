@@ -54,3 +54,11 @@ export class Errors {
 		res.status(err.status).json(objError);
 	}
 }
+
+export const MessagesError = {
+	USER_NOT_LOGGED: 'User not logged',
+	USER_FORBIDDEN: 'User not authorized',
+
+	TOKEN_EXPIRED: 'Token expired',
+	TOKEN_INVALID: 'Token invalid',
+};

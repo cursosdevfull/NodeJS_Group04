@@ -1,0 +1,44 @@
+{
+	"definition": {
+		"openapi": "3.0.0",
+		"info": {
+			"title": "API Ambulance",
+			"version": "1.0.0",
+			"description": "Information about API and endpoints",
+			"contact": {
+				"name": "Sergio Hidalgo",
+				"url": "https://cursos-dev.com",
+				"email": "sergiohidalgocaceres@gmail.com"
+			},
+			"license": {
+				"name": "MIT",
+				"url": "https://spdx.org/licenses/MIT.html"
+			}
+		},
+		"components": {
+			"securitySchemes": {
+				"JWTAuth": {
+					"type": "http",
+					"scheme": "bearer",
+					"bearerFormat": "JWT"
+				}
+			}
+		},
+		"security": [
+			{
+				"JWTAuth": []
+			}
+		],
+		"servers": [
+			{
+				"url": "http://localhost:3000",
+				"description": "Development Server"
+			},
+			{
+				"url": "http://256489656656.aws.amazon.com",
+				"description": "Production Server"
+			}
+		]
+	},
+	"apis": ["**/infraestructura/*.route.ts"]
+}

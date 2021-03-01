@@ -1,4 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
+import { MessagesError } from '../errors';
+import { Responses } from '../responses';
 import { Tokens } from '../token';
 
 export class AutenticacionGuard {
@@ -9,7 +11,7 @@ export class AutenticacionGuard {
 		if (authorization) {
 			const partsAuthorization = authorization.split(' ');
 			if (partsAuthorization.length < 2) {
-				res.status(401).send('User not logged');
+				Responses.sentUserNotAuthenticated(res, MessagesError.USER_NOT_LOGGED);
 			} else {
 				const accessToken = partsAuthorization[1];
 				Tokens.validateAccessToken(accessToken).then(
@@ -18,12 +20,17 @@ export class AutenticacionGuard {
 						next();
 					},
 					(error: { status: number; message: string }) => {
-						res.status(error.status).send(error.message);
+						if (error.status === 401) {
+							Responses.sentUserNotAuthenticated(res, error.message);
+						} else {
+							Responses.sentUserForbidden(res, error.message);
+						}
+						// res.status(error.status).send(error.message);
 					}
 				);
 			}
 		} else {
-			res.status(401).send('User not logged');
+			Responses.sentUserNotAuthenticated(res, MessagesError.USER_NOT_LOGGED);
 		}
 	}
 }

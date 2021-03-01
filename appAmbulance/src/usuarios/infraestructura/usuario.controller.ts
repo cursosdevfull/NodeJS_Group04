@@ -16,7 +16,7 @@ export class UsuarioController {
 	}
 
 	async getAll(req: Request, res: Response) {
-		const where: object = { last: '20' };
+		const where: object = {};
 		const relations: string[] = ['roles'];
 		const order: object = {};
 

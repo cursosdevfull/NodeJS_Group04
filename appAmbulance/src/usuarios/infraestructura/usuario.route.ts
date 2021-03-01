@@ -13,7 +13,40 @@ const router: Router = express.Router();
 const operation = new UsuarioOperation();
 const usecase = new UsuarioUseCase(operation);
 const controller = new UsuarioController(usecase);
-
+/**
+ * @swagger
+ * /users:
+ *  get:
+ *    tags:
+ *      - User
+ *    security:
+ *      - JWTAuth: []
+ *    description: List of users
+ *    responses:
+ *      "200":
+ *        description: List of all users
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: array
+ *              items:
+ *                type: object
+ *                properties:
+ *                  id:
+ *                    type: number
+ *                  nombre:
+ *                    type: string
+ *                  correo:
+ *                    type: string
+ *                  password:
+ *                    type: string
+ *      "401":
+ *         description: Credentials are invalid
+ *         content:
+ *          application/json:
+ *            schema:
+ *              $ref: "#/components/schemas/UserForbidden"
+ */
 router.get(
 	'/',
 	AutenticacionGuard.canActivate,
@@ -21,6 +54,52 @@ router.get(
 	SchemaValidator.validate(UsuarioSchema.GET_ALL),
 	Errors.asyncError(controller.getAll)
 );
+
+/**
+ * @swagger
+ * /users/page/{page}/{pageSize}:
+ *  get:
+ *    tags:
+ *      - User
+ *    security:
+ *      - JWTAuth: []
+ *    description: Return list of users by page
+ *    parameters:
+ *      - name: page
+ *        in: path
+ *        required: true
+ *        type: integer
+ *        description: Page to display
+ *      - name: pageSize
+ *        in: path
+ *        required: true
+ *        type: integer
+ *        description: Size of page
+ *    responses:
+ *      "200":
+ *        description: List of users
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: array
+ *              items:
+ *                type: object
+ *                properties:
+ *                  id:
+ *                    type: number
+ *                  nombre:
+ *                    type: string
+ *                  correo:
+ *                    type: string
+ *                  password:
+ *                    type: string
+ *      "401":
+ *         description: Credentials are invalid
+ *         content:
+ *          application/json:
+ *            schema:
+ *              $ref: "#/components/schemas/UserForbidden"
+ */
 router.get(
 	'/page/:page/:pageSize',
 	AutenticacionGuard.canActivate,
