@@ -30,4 +30,7 @@ export class Usuario {
 	@ManyToMany(type => Rol, rol => rol.usuarios)
 	@JoinTable()
 	roles: Rol[];
+
+	@Column({ type: 'varchar', length: 100 })
+	foto: string;
 }

@@ -19,6 +19,6 @@ COPY --from=stageBuild /app/dist ./dist
 COPY package.json .
 COPY env.yaml . 
 
-EXPOSE 85
+EXPOSE 80
 
 CMD ["npm", "run", "serve"]

@@ -7,6 +7,7 @@ export const schemas = {
 			email: Joi.string().email().required(),
 			password: Joi.string().required(),
 			roles: Joi.array().required(),
+			foto: Joi.string(),
 		}),
 	},
 	PUT_UPDATE: {

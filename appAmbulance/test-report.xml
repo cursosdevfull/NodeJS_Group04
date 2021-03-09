@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testExecutions version="1">
+  <file path="D:\Cursos\nodejs04\appAmbulance\test\unit\piloto.operation.spec.ts">
+    <testCase name="piloto.operation.ts getAll" duration="10"/>
+  </file>
+  <file path="D:\Cursos\nodejs04\appAmbulance\test\unit\piloto.usecase.spec.ts">
+    <testCase name="piloto.usecase.ts getAll" duration="10"/>
+  </file>
+  <file path="D:\Cursos\nodejs04\appAmbulance\test\unit\piloto.controller.spec.ts">
+    <testCase name="piloto.controller.ts getAll" duration="17"/>
+  </file>
+  <file path="D:\Cursos\nodejs04\appAmbulance\test\integration\server.spec.ts">
+    <testCase name="server.ts server is up" duration="37"/>
+  </file>
+  <file path="D:\Cursos\nodejs04\appAmbulance\test\integration\piloto.route.spec.ts">
+    <testCase name="piloto.route.ts list drivers with token invalid" duration="36"/>
+    <testCase name="piloto.route.ts list drivers without token" duration="6"/>
+    <testCase name="piloto.route.ts list drivers with token expired" duration="10"/>
+  </file>
+  <file path="D:\Cursos\nodejs04\appAmbulance\test\integration\usuario.route.spec.ts">
+    <testCase name="user.route.ts get user with token valid and id valid" duration="42"/>
+    <testCase name="user.route.ts get user with token valid and id invalid" duration="11"/>
+  </file>
+</testExecutions>

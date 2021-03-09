@@ -60,6 +60,7 @@ export class UsuarioController {
 			correo: req.body.email,
 			password: req.body.password,
 			refreshToken: Tokens.generateRefreshToken(),
+			foto: req.body.foto,
 		};
 
 		const roles: any[] = req.body.roles;

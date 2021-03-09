@@ -15,6 +15,7 @@ export class Tokens {
 			exp: moment().add(env.TOKEN.TIMEOUT, env.TOKEN.UNITS).unix(),
 			nombre: user.nombre,
 			email: user.correo,
+			foto: 'https://cursonode4.s3.us-east-2.amazonaws.com/' + user.foto,
 			roles: user.roles.map((el: any) => el.rol),
 		};
 

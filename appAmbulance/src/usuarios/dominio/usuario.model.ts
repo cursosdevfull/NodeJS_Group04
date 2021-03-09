@@ -6,4 +6,5 @@ export interface UsuarioModel {
 	refreshToken: string;
 	activo: boolean;
 	roles: any;
+	foto: string;
 }

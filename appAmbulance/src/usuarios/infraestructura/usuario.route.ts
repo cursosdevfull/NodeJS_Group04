@@ -2,6 +2,7 @@ import express, { Router } from 'express';
 import { Errors } from '../../compartido/infraestructura/errors';
 import { AutenticacionGuard } from '../../compartido/infraestructura/guards/autenticacion.guard';
 import { AutorizacionGuard } from '../../compartido/infraestructura/guards/autorizacion.guard';
+import { Upload } from '../../compartido/infraestructura/middlewares/upload.middleware';
 import SchemaValidator from '../../compartido/infraestructura/validador';
 import { UsuarioUseCase } from '../aplicacion/usuario.usecase';
 import { UsuarioController } from './usuario.controller';
@@ -119,6 +120,7 @@ router.post(
 	'/',
 	AutenticacionGuard.canActivate,
 	AutorizacionGuard.canActivate('ADMIN', 'MEDIC'),
+	Upload.S3('foto'),
 	SchemaValidator.validate(UsuarioSchema.POST_INSERT),
 	Errors.asyncError(controller.insert)
 );
