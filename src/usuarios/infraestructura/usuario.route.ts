@@ -2,6 +2,7 @@ import express, { Router } from 'express';
 import { Errors } from '../../compartido/infraestructura/errors';
 import { AutenticacionGuard } from '../../compartido/infraestructura/guards/autenticacion.guard';
 import { AutorizacionGuard } from '../../compartido/infraestructura/guards/autorizacion.guard';
+import { CacheRedis } from '../../compartido/infraestructura/middlewares/cache.middleware';
 import { Upload } from '../../compartido/infraestructura/middlewares/upload.middleware';
 import SchemaValidator from '../../compartido/infraestructura/validador';
 import { UsuarioUseCase } from '../aplicacion/usuario.usecase';
@@ -53,6 +54,7 @@ router.get(
 	AutenticacionGuard.canActivate,
 	AutorizacionGuard.canActivate('ADMIN', 'MEDIC'),
 	SchemaValidator.validate(UsuarioSchema.GET_ALL),
+	CacheRedis.handle('LIST_USERS'),
 	Errors.asyncError(controller.getAll)
 );
 
