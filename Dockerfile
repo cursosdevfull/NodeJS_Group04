@@ -1,6 +1,6 @@
 FROM node:14.7.0-alpine3.10 as stageBuild
 
-ADD package*.json /tmp
+ADD package*.json /tmp/
 
 RUN cd /tmp && npm install
 RUN mkdir /app && cp -a /tmp/node_modules /app
