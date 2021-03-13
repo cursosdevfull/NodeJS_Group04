@@ -1,4 +1,5 @@
 import { Response } from 'express';
+import { RedisBootstrap } from '../../bootstrap/redis.bootstrap';
 
 export class Responses {
 	static notFound(res: Response, message: string = 'Not found') {
@@ -8,7 +9,17 @@ export class Responses {
 		});
 	}
 
-	static sentOk(res: Response, result: any | any[], status: number = 200) {
+	static async sentOk(
+		res: Response,
+		result: any | any[],
+		status: number = 200
+	) {
+		if (res.locals.cacheIdentifier) {
+			await RedisBootstrap.set(
+				res.locals.cacheIdentifier,
+				JSON.stringify(result)
+			);
+		}
 		res.status(status).json({
 			status: status,
 			result,
