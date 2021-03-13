@@ -1,4 +1,4 @@
-FROM node:alpine3.10 as stageBuild
+FROM node:14.7.0-alpine3.10 as stageBuild
 
 ADD package*.json /tmp
 
@@ -10,7 +10,7 @@ ADD . .
 
 RUN npm run build
 
-FROM node:alpine3.10
+FROM node:14.7.0-alpine3.10
 
 WORKDIR /app
 
