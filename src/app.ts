@@ -79,7 +79,7 @@ app.use('/users', RouterUser);
 app.use('/drivers', AutenticacionGuard.canActivate, RouterDriver);
 app.use('/auth', RouterAuth);
 
-app.get('/health', (req, res) => res.send('todo ok'));
+app.get('/health', (req, res) => res.send('I am alive'));
 
 app.use(Errors.pathNotFoundError);
 app.use(Errors.genericError);
