@@ -3,6 +3,7 @@ import { Request, Response } from 'express';
 import { UsuarioModel } from '../dominio/usuario.model';
 import { Tokens } from '../../compartido/infraestructura/token';
 import { userInfo } from 'os';
+import { Responses } from '../../compartido/infraestructura/responses';
 
 export class UsuarioController {
 	constructor(private readonly usecase: UsuarioUseCase) {
@@ -21,7 +22,7 @@ export class UsuarioController {
 		const order: object = {};
 
 		const resultados = await this.usecase.getAll(where, relations, order);
-		res.json(resultados);
+		Responses.sentOk(res, resultados);
 	}
 
 	async getSearch(req: Request, res: Response) {
