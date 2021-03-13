@@ -1,9 +1,0 @@
-1. Descargar aws-cli (https://aws.amazon.com/es/cli)
-2. Ingresar credenciales
-  aws configure
-3. Vincular Docker con el repositorio en AWS
-  aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 282865065290.dkr.ecr.us-east-2.amazonaws.com/appcursonode
-4. Taggear la imagen
-  docker tag appnode04:latest 282865065290.dkr.ecr.us-east-2.amazonaws.com/appcursonode
-5. Subir al repositorio de AWS (ECR)
-  docker push 282865065290.dkr.ecr.us-east-2.amazonaws.com/appcursonode:latest
